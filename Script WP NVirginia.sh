@@ -1,5 +1,6 @@
-﻿#!/bin/bash
+#!/bin/bash
 
+#Amazon
 yum update -y
 yum install git httpd php php-mysql stress -y
 
@@ -18,14 +19,17 @@ rm -rf httpd.conf
 
 cd ~/wp2
 cp -r httpd.conf /etc/httpd/conf/httpd.conf
-cp -rf wp-config-nvirginia.php /var/www/html/wp-config.php
-cp -rf wordpress/* /var/www/html/
+cp -rf wp-config.php /var/www/html/
+mkdir /var/www/html/wordpress
+cp -rf wordpress/* /var/www/html/wordpress
 #cp -rf wp-config.php /var/www/html/
 
 cd /var/www/html/
 
 chmod -R 755 wp-content
-chown -R apache.apache wp*
+chmod -R 755 wp-config.php
+chmod -R 755 wordpress
+chown -R apache.apache w*
 
 service httpd start
 chkconfig httpd on
